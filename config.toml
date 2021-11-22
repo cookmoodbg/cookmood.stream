@@ -1,5 +1,5 @@
-title = "Малко готварско блогче"
-baseURL = "http://cookmood.stream"
+title = "Cookmood personal cooking blog"
+baseURL = "https://cookmood.stream"
 languageCode = "bg-BG"
 theme = "ananke"
 themesDir = "./themes"
