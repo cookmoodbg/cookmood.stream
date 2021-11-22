@@ -1,14 +1,30 @@
+language: python
+
 install:
-  - curl -LO https://github.com/gohugoio/hugo/releases/download/v0.75.1/hugo_0.75.1_Linux-64bit.tar.gz
-  - tar -xf hugo_0.75.1_Linux-64bit.tar.gz
+  - curl -LO https://github.com/gohugoio/hugo/releases/download/v0.89.4/hugo_extended_0.89.4_Linux-64bit.tar.gz
+  - tar -xf hugo_extended_0.89.4_Linux-64bit.tar.gz
 
 script:
-  - ./hugo
+  - HUGO_ENV=production ./hugo
 
 deploy:
-  provider: surge
-  project: ./public/
-  skip_cleanup: true
-  domain: cookmood.stream
-  on:
-    branch: master
+  - provider: netlify
+    dir: ./public/
+    site: $NETLIFY_SITE
+    auth: $NETLIFY_AUTH
+    edge: true
+    prod: true
+    skip_cleanup: true
+    on:
+      branch: master
+
+  - provider: netlify
+    dir: ./public/
+    site: $NETLIFY_SITE
+    auth: $NETLIFY_AUTH
+    edge: true
+    prod: false
+    skip_cleanup: true
+    on:
+      all_branches: true
+      condition: $TRAVIS_BRANCH =~ ^(feature\/.+)$
