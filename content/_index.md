@@ -1,6 +1,6 @@
 ---
-title: "Ananke: a Hugo Theme"
-featured_image: '/images/gohugo-default-sample-hero-image.jpg'
-description: "The last theme you'll ever need. Maybe."
+title: "За минутите, в които обичаме да готвим"
+featured_image: ''
+description: ""
 ---
-Welcome to my blog with some of my work in progress. I've been working on this book idea. You can read some of the chapters below.
+Добре дошли в моя готварски блог. Той още е в процес на разработка и добавяне на съдържание. Посетете ни отново скоро, за да откриете нови идеи за бързи и вкусни рецепти.
