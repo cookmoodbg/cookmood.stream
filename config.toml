@@ -1,13 +1,11 @@
-title = "Cookmood personal cooking blog"
-baseURL = "https://cookmood.stream"
+baseURL = ""
 languageCode = "bg-BG"
+title = "cookmood - готварски блог"
+
 theme = "ananke"
-themesDir = "./themes"
 
 DefaultContentLanguage = "bg"
-SectionPagesMenu = "main"
 Paginate = 5
-googleAnalytics = ""
 enableRobotsTXT = true
 
 [sitemap]
@@ -17,8 +15,8 @@ enableRobotsTXT = true
 
 [params]
   favicon = ""
-  site_logo = ""
-  description = "Блог посветен на хитри рецепти"
+  site_logo = "images/cookmood.stream_logo.png"
+  description = "моите готварски идеи под формата на блог"
   facebook = ""
   twitter = ""
   instagram = ""
@@ -31,6 +29,12 @@ enableRobotsTXT = true
   stackoverflow = ""
   rss = ""
   # choose a background color from any on this page: http://tachyons.io/docs/themes/skins/ and preface it with "bg-"
-  background_color_class = "bg-black"
-  featured_image = "/images/gohugo-default-sample-hero-image.jpg"
-  recent_posts_number = 2
+  background_color_class = "bg-white"
+  featured_image = ""
+  recent_posts_number = 5
+  copyright_logo_text = "лого: hati.royani & sunar.ko от vecteezy.com"
+  copyright_logo_url = "http://www.freepik.com"
+  body_classes = "font-ubuntu bg-near-white"
+  post_content_classes = "font-ubuntu-mono bg-near-white"
+  custom_css = ["css/fonts.css", "css/gallery.css", "css/map.css", "css/search.css"]
+  web_fonts = ["https://fonts.googleapis.com/css?family=Ubuntu","https://fonts.googleapis.com/css?family=Ubuntu Mono"]

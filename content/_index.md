@@ -1,6 +1,6 @@
 ---
-title: "Ananke: a Hugo Theme"
+title: "малък готварски блог"
 featured_image: '/images/gohugo-default-sample-hero-image.jpg'
-description: "The last theme you'll ever need. Maybe."
+description: "за моментите, в които медитираме в кухнята"
 ---
-Welcome to my blog with some of my work in progress. I've been working on this book idea. You can read some of the chapters below.
+Добре дошли в моя малък готварски блог. В момента все още добавям първоначалното съдържание. Посетете ме пак скоро за нови вкусни идеи.
