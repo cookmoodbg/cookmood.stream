@@ -1,4 +1,4 @@
 baseURL = 'https://cookmood.stream/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+languageCode = 'bg-BG'
+title = 'Малък готварски блог'
 theme = 'cookmood'
