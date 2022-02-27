@@ -1,4 +1,7 @@
-baseURL = 'https://cookmood.stream/'
+baseURL = ''
 languageCode = 'bg-BG'
 title = 'Малък готварски блог'
 theme = 'cookmood'
+
+[params.default.header]
+    description = "моят готварски блог"
