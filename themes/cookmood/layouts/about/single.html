@@ -1,10 +1,15 @@
 {{ define "main" }}
-<main class="pa3 pa5-ns">
-   <p class="f4 lh-copy measure">
-     Typography has one plain duty before it and that is to convey information
-     in writing. No argument or consideration can absolve typography from this
-     duty. A printed work which cannot be read becomes a product without
-     purpose.
-   </p>
-</main>
+  <article class="cf ph3 ph5-ns pv5 avenir">
+    <div class="fn fl-ns w-100-ns">
+      <p class="f5 lh-copy">
+        Typography has one plain duty before it and that is to convey information
+        in writing. No argument or consideration can absolve typography from this
+        duty. A printed work which cannot be read becomes a product without
+        purpose.
+      </p>
+      <p class="f5 lh-copy">
+        {{ .Content }}
+      </p>
+    </div>
+  </article>
 {{ end }}
