@@ -1,4 +1,22 @@
 {{ define "main" }}
-<p>list</p>
-{{.Content}}
+<article>
+    <div class="cf pa2">
+        {{ range .Pages }}
+        <div class="fl w-50 w-25-m w-20-l pa2">
+            <a href="{{ .Permalink }}" class="db link dim tc">
+                {{ with .Resources.GetMatch "thumbnail.jpg" }}
+                <img src="data:{{ .MediaType }};base64,{{ .Content | base64Encode }}" alt="{{ .Title }}"
+                    class="w-100 db outline black-10" />
+                {{ end }}
+                <dl class="mt2 f6 lh-copy">
+                    <dt class="clip">Title</dt>
+                    <dd class="ml0 black truncate w-100">{{ .Title }}</dd>
+                    <dt class="clip">Description</dt>
+                    <dd class="ml0 gray truncate w-100">{{ .Description }}</dd>
+                </dl>
+            </a>
+        </div>
+        {{ end }}
+    </div>
+</article>
 {{ end }}

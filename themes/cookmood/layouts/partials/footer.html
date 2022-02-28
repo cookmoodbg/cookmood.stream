@@ -1,8 +1,6 @@
-<footer class="pv4 ph3 ph5-m ph6-l mid-gray">
-    <small class="f6 db tc">© 2016 <b class="ttu">SOME COMPANY Inc</b>., All Rights Reserved</small>
+<footer class="pv4 ph3 ph5-m ph6-l mid-gray avenir">
+    <small class="f6 db tc">© {{ now.Format "2006"}} <b class="ttu">{{ .Site.Title }}</b>, Всички права запазени.</small>
     <div class="tc mt3">
-        <a href="/language/" title="Language" class="f6 dib ph2 link mid-gray dim">Language</a>
-        <a href="/terms/" title="Terms" class="f6 dib ph2 link mid-gray dim">Terms of Use</a>
-        <a href="/privacy/" title="Privacy" class="f6 dib ph2 link mid-gray dim">Privacy</a>
+        {{ partial "social-follow.html" . }}
     </div>
 </footer>

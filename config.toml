@@ -1,7 +1,14 @@
 baseURL = ''
 languageCode = 'bg-BG'
-title = 'Малък готварски блог'
+title = 'cookmood блог'
 theme = 'cookmood'
 
-[params.default.header]
+[params.header.default]
     description = "моят готварски блог"
+[params.footer.social]
+    follow_facebook_url = ""
+    follow_instagram_url = ""
+    follow_twitter_url = ""
+    follow_rss_url = "/index.xml"
+[params.single]
+    enable_social_share = true

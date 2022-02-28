@@ -1,5 +1,5 @@
 ---
-title: "Main"
+title: "Основни ястия"
 date: 2022-02-24T15:04:52+02:00
 draft: false
 ---

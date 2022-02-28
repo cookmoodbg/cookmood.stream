@@ -1,5 +1,5 @@
 ---
-title: "Salad"
+title: "Салати"
 date: 2022-02-24T09:49:05+02:00
 draft: false
 ---
