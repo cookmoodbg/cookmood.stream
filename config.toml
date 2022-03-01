@@ -3,6 +3,11 @@ languageCode = 'bg-BG'
 title = 'cookmood блог'
 theme = 'cookmood'
 
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
 [params.header.default]
     description = "моят готварски блог"
 [params.footer.social]
@@ -12,3 +17,6 @@ theme = 'cookmood'
     follow_rss_url = "/index.xml"
 [params.single]
     enable_social_share = true
+
+[params.e404]
+    message = "Съдържанието не е открито."

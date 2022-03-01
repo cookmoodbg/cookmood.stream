@@ -4,7 +4,7 @@
         <h1 class="f3 mid-gray lh-title">
             {{ .Title }}
         </h1>
-        <time class="f6 ttu tracked gray">Sometime before 1967</time>
+        <time class="f6 ttu tracked gray">{{ .Date.Format "January 2, 2006" }}</time>
         
         {{ partial "social-share.html" . }}
 
@@ -12,26 +12,12 @@
             <div class="overflow-auto">
                 <table class="f6 w-100 mw8 center" cellspacing="0">
                     <tbody class="lh-copy">
+                        {{ range $key, $value := .Params.ingredients }}
                         <tr>
-                            <td class="pv3 pr3 bb b--black-20">Hassan Johnson</td>
-                            <td class="pv3 pr3 bb b--black-20">@hassan</td>
+                            <td class="pv3 pr3 bb b--black-20">{{$key}}</td>
+                            <td class="pv3 pr3 bb b--black-20">{{$value}}</td>
                         </tr>
-                        <tr>
-                            <td class="pv3 pr3 bb b--black-20">Taral Hicks</td>
-                            <td class="pv3 pr3 bb b--black-20">@hicks</td>
-                        </tr>
-                        <tr>
-                            <td class="pv3 pr3 bb b--black-20">Tyrin Turner</td>
-                            <td class="pv3 pr3 bb b--black-20">@tt</td>
-                        </tr>
-                        <tr>
-                            <td class="pv3 pr3 bb b--black-20">Oliver Grant</td>
-                            <td class="pv3 pr3 bb b--black-20">@oli</td>
-                        </tr>
-                        <tr>
-                            <td class="pv3 pr3 bb b--black-20">Dean Blanc</td>
-                            <td class="pv3 pr3 bb b--black-20">@deanblanc</td>
-                        </tr>
+                        {{ end }}
                     </tbody>
                 </table>
             </div>
@@ -39,26 +25,13 @@
 
     </header>
     <div class="fn fl-ns w-50-ns">
-        <img src="http://tachyons.io/img/under-canvas.jpg" class="mw-100" alt="night sky over water">
+        {{ with .Resources.GetMatch "cover.jpg" }}
+        <img src="data:{{ .MediaType }};base64,{{ .Content | base64Encode }}" alt="{{ .Title }}"
+            class="mw-100" />
+        {{ end }}
     </div>
-    <div class="fn fl-ns w-100-ns">
-        <p class="f5 lh-copy">
-            TYPOGRAPHY, even when poorly executed, can never be taken for granted;
-            nor is it ever accidental. Indeed, beauti- fully typeset pages are always
-            the result of long experience. Now and then they even attain the rank of
-            great artistic achievement. But the art of typesetting stands apart from
-            ex- pressive artwork, because the appeal is not limited to a small
-            circle. It is open to everyone's critical judgment, and nowhere does this
-            judgment carry more weight. Typography that can- not be read by everybody
-            is useless. Even for someone who constantly ponders matters of
-            readability and legibility, it is difficult to determine whether
-            something can be read with ease, but the average reader will rebel at
-            once when the type is too small or otherwise irritates the eye; both are
-            signs of a certain illegibility already.
-        </p>
-        <p class="f5 lh-copy">
-            {{.Content}}
-        </p>
+    <div class="fn fl-ns w-100-ns f5 lh-copy">
+        {{.Content}}
     </div>
 </article>
 {{ end }}
