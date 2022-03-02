@@ -1,6 +1,6 @@
 {{ define "main" }}
-<article class="cf ph3 ph5-ns pv5 avenir">
-    <header class="fn fl-ns w-50-ns pr4-ns">
+<article class="cf ph3 ph6-ns pv4 avenir">
+    <header class="fn fl-ns w-50-ns">
         <h1 class="f3 mid-gray lh-title">
             {{ .Title }}
         </h1>
@@ -24,7 +24,7 @@
         </div>
 
     </header>
-    <div class="fn fl-ns w-50-ns">
+    <div class="fn fl-ns w-50-ns pv4">
         {{ with .Resources.GetMatch "cover.jpg" }}
         <img src="data:{{ .MediaType }};base64,{{ .Content | base64Encode }}" alt="{{ .Title }}"
             class="mw-100" />
