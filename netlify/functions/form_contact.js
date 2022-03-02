@@ -1,5 +1,4 @@
 const sendMail = require('sendmail')()
-const { validateEmail, validateLength } = require('../utils/validations')
 
 exports.handler = (event, context, callback) => {
   if (!process.env.CONTACT_EMAIL) {
@@ -12,7 +11,7 @@ exports.handler = (event, context, callback) => {
   const body = JSON.parse(event.body)
 
   try {
-    validateLength('body.name', body.name, 3, 50)
+    //validateLength('body.name', body.name, 3, 50)
   }
   catch (e) {
     return callback(null, {
@@ -22,7 +21,7 @@ exports.handler = (event, context, callback) => {
   }
 
   try {
-    validateEmail('body.email', body.email)
+    //validateEmail('body.email', body.email)
   }
   catch (e) {
     return callback(null, {
@@ -32,7 +31,7 @@ exports.handler = (event, context, callback) => {
   }
 
   try {
-    validateLength('body.message', body.message, 10, 1000)
+    //validateLength('body.message', body.message, 10, 1000)
   }
   catch (e) {
     return callback(null, {
