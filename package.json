@@ -1,0 +1,9 @@
+{
+    "scripts": {
+    },
+    "devDependencies": {
+    },
+    "dependencies": {
+      "sendmail": "1.4.1"
+    }
+  }
