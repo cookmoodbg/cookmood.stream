@@ -9,14 +9,22 @@ theme = 'cookmood'
   filename = "sitemap.xml"
 
 [params.header.default]
-    description = "моят готварски блог"
+  description = "моят готварски блог"
+  to_beginning = "Начало"
+[params.footer.default]
+  copyright_message = "Всички права запазени."
 [params.footer.social]
-    follow_facebook_url = ""
-    follow_instagram_url = ""
-    follow_twitter_url = ""
-    follow_rss_url = "/index.xml"
+  follow_facebook_url = ""
+  follow_instagram_url = ""
+  follow_twitter_url = ""
+  follow_rss_url = "/index.xml"
 [params.single]
-    enable_social_share = true
-
+  enable_social_share = true
+[params.contact.default]
+  label_name = "Вашето име"
+  label_email = "Вашият email"
+  label_message = "Вашето съобщение"
+[params.contact]
+  action = "/.netlify/functions/form_contact"
 [params.e404]
-    message = "Съдържанието не е открито."
+  message = "Съдържанието не е открито."
