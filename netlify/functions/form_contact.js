@@ -1,5 +1,5 @@
 const sendMail = require('sendmail')
-const busboy = require('busboy')
+const Busboy = require('busboy')
 
 exports.handler = (event, context, callback) => {
   if (!process.env.CONTACT_EMAIL) {

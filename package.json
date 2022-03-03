@@ -1,9 +1,12 @@
 {
     "scripts": {
+      "build:functions": "netlify functions:build --src ./netlify/functions/"
     },
     "devDependencies": {
+      "netlify-cli": "9.12.2"
     },
     "dependencies": {
-      "sendmail": "1.4.1"
+      "sendmail": "1.4.1",
+      "busboy": "1.4.0"
     }
   }
