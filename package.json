@@ -1,0 +1,11 @@
+{
+    "scripts": {
+      "build:functions": "netlify functions:build --src ./netlify/functions/"
+    },
+    "devDependencies": {
+      "netlify-cli": "9.12.2"
+    },
+    "dependencies": {
+      "nodemailer": "6.7.2"
+    }
+  }

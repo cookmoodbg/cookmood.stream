@@ -1,4 +1,37 @@
 {{ define "main" }}
-<p>page</p>
-{{.Content}}
+<article class="cf ph3 ph6-ns pv4 avenir">
+    <header class="fn fl-ns w-50-ns">
+        <h1 class="f3 mid-gray lh-title">
+            {{ .Title }}
+        </h1>
+        <time class="f6 ttu tracked gray">{{ .Date.Format "January 2, 2006" }}</time>
+        
+        {{ partial "social-share.html" . }}
+
+        <div class="pa4">
+            <div class="overflow-auto">
+                <table class="f6 w-100 mw8 center" cellspacing="0">
+                    <tbody class="lh-copy">
+                        {{ range $key, $value := .Params.ingredients }}
+                        <tr>
+                            <td class="pv3 pr3 bb b--black-20">{{$key}}</td>
+                            <td class="pv3 pr3 bb b--black-20">{{$value}}</td>
+                        </tr>
+                        {{ end }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </header>
+    <div class="fn fl-ns w-50-ns pv4">
+        {{ with .Resources.GetMatch "cover.jpg" }}
+        <img src="data:{{ .MediaType }};base64,{{ .Content | base64Encode }}" alt="{{ .Title }}"
+            class="mw-100" />
+        {{ end }}
+    </div>
+    <div class="fn fl-ns w-100-ns f5 lh-copy">
+        {{.Content}}
+    </div>
+</article>
 {{ end }}

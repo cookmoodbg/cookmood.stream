@@ -1,0 +1,8 @@
+{{ define "main" }}
+  <article class="cf ph3 ph6-ns avenir">
+    <div class="fn fl-ns w-100-ns f5 lh-copy">
+      {{ .Content }}
+      {{ partial "form-contact.html" . }}
+    </div>
+  </article>
+{{ end }}
