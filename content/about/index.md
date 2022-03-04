@@ -5,4 +5,4 @@ type: about
 draft: false
 ---
 
-This is the about page content
+Ако имате въпроси по рецептите от блога, можете да изпратите съобщение от формата по-долу.
