@@ -1,83 +1,159 @@
-const sendMail = require('sendmail')
-const Busboy = require('busboy')
+"use strict";
 
-exports.handler = (event, context, callback) => {
-  if (!process.env.CONTACT_EMAIL) {
-    return callback(null, {
+const nodemailer = require("nodemailer");
+const querystring = require('querystring');
+
+exports.handler = async (event, context) => {
+
+  const envParamsValidationStatus = validateEnvParams();
+  if (envParamsValidationStatus.length > 0) {
+    return {
       statusCode: 500,
-      body: 'process.env.CONTACT_EMAIL must be defined',
-    })
+      body: envParamsValidationStatus.toString() + ' must be defined'
+    };
   }
 
-  const busboy = new Busboy({
-    headers: event.headers
+  const fields = querystring.parse(event.body);
+
+  const userParamsValidationStatus = validateUserParams(fields);
+  if (Object.keys(userParamsValidationStatus).length > 0) {
+    return {
+      statusCode: 400,
+      body: userParamsValidationStatus.toString()
+    };
+  }
+
+  var transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: 2525,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS
+    }
   });
 
-  const fields = {};
-
-  // whenever busboy comes across a normal field ...
-  busboy.on("field", (fieldName, value) => {
-    // ... we write its value into `fields`.
-    fields[fieldName] = value;
-  });
-
-  // once busboy is finished, we resolve the promise with the resulted fields.
-  busboy.on("finish", () => {
-    resolve(fields)
-  });
-
-  // now that all handlers are set up, we can finally start processing our request!
-  busboy.write(event.body);
-
-  try {
-    //validateLength('body.name', body.name, 3, 50)
-  }
-  catch (e) {
-    return callback(null, {
-      statusCode: 403,
-      body: e.message
-    })
-  }
-
-  try {
-    //validateEmail('body.email', body.email)
-  }
-  catch (e) {
-    return callback(null, {
-      statusCode: 403,
-      body: e.message
-    })
-  }
-
-  try {
-    //validateLength('body.message', body.message, 10, 1000)
-  }
-  catch (e) {
-    return callback(null, {
-      statusCode: 403,
-      body: e.message
-    })
-  }
-
-  const descriptor = {
-    from: `"${fields.email}" <no-reply@cookmood.stream>`,
+  const mailDescriptor = {
+    from: fields.email,
     to: process.env.CONTACT_EMAIL,
-    subject: `${fields.name} sent you a message from cookmood.stream`,
+    subject: fields.name + 'sent you a message from cookmood.stream',
     text: fields.message,
+  };
+
+  const startTimeSeconds = (new Date()).getTime() / 1000.0;
+  let success, error;
+  do {
+    try {
+      success = await transporter.sendMail(mailDescriptor);
+      break;
+    } catch (e) {
+      error = e;
+    }
+  } while (((new Date()).getTime() / 1000.0) - startTimeSeconds <= 5);
+
+  if (success) {
+    return {
+      statusCode: 303,
+      headers: {
+        "Location": "/"
+      }
+    };
+  }
+  if (error) {
+    return {
+      statusCode: 500,
+      body: error.name + error.message
+    };
   }
 
-  sendMail(descriptor, (e) => {
-    if (e) {
-      callback(null, {
-        statusCode: 500,
-        body: e.message
-      })
-    }
-    else {
-      callback(null, {
-        statusCode: 200,
-        body: '',
-      })
-    }
-  })
+}
+
+function validateEnvParams() {
+
+  const missingEnvParams = [];
+  if (!process.env.CONTACT_EMAIL) {
+    missingEnvParams.push("CONTACT_EMAIL");
+  }
+  if (!process.env.SMTP_HOST) {
+    missingEnvParams.push("SMTP_HOST");
+  }
+  if (!process.env.SMTP_USER) {
+    missingEnvParams.push("SMTP_USER");
+  }
+  if (!process.env.SMTP_PASS) {
+    missingEnvParams.push("SMTP_PASS");
+  }
+  return missingEnvParams;
+
+}
+
+function validateUserParams(fields) {
+
+  const badEnvParams = {};
+
+  try {
+    validateLength('name', fields.name, 3, 50)
+  }
+  catch (e) {
+    badEnvParams['name'] = e;
+  }
+
+  try {
+    validateEmail('email', fields.email)
+  }
+  catch (e) {
+    badEnvParams['email'] = e;
+  }
+
+  try {
+    validateLength('message', fields.message, 10, 1000)
+  }
+  catch (e) {
+    badEnvParams['message'] = e;
+  }
+  console.log(badEnvParams);
+  return badEnvParams;
+
+}
+
+function validateEmail(ctx, str) {
+  if (
+    typeof str !== 'string' &&
+    !(str instanceof String)
+  ) {
+    throw TypeError(`${ctx} must be a string`)
+  }
+
+  validateLength(ctx, str, 5, 30)
+
+  if (!/^[\w.-]+@[\w.-]+\.\w+$/.test(str)) {
+    throw TypeError(`${ctx} is not an email address`)
+  }
+}
+
+function validateLength(ctx, str, ...args) {
+  let min, max
+
+  if (args.length === 1) {
+    min = 0
+    max = args[0]
+  }
+  else {
+    min = args[0]
+    max = args[1]
+  }
+
+  if (
+    typeof str !== 'string' &&
+    !(str instanceof String)
+  ) {
+    throw TypeError(`${ctx} must be a string`)
+  }
+
+  if (str.length < min) {
+    throw TypeError(`${ctx} must be at least ${min} chars long`)
+  }
+
+  if (str.length > max) {
+    throw TypeError(`${ctx} must contain ${max} chars at most`)
+  }
 }
