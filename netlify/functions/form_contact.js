@@ -19,7 +19,7 @@ exports.handler = async (event, context) => {
   if (Object.keys(userParamsValidationStatus).length > 0) {
     return {
       statusCode: 400,
-      body: userParamsValidationStatus.toString()
+      body: JSON.stringify(userParamsValidationStatus)
     };
   }
 
@@ -91,26 +91,26 @@ function validateUserParams(fields) {
   const badEnvParams = {};
 
   try {
-    validateLength('name', fields.name, 3, 50)
+    validateLength('name', fields.name, 1, 50)
   }
   catch (e) {
-    badEnvParams['name'] = e;
+    badEnvParams['name'] = e.message;
   }
 
   try {
     validateEmail('email', fields.email)
   }
   catch (e) {
-    badEnvParams['email'] = e;
+    badEnvParams['email'] = e.message;
   }
 
   try {
-    validateLength('message', fields.message, 10, 1000)
+    validateLength('message', fields.message, 1, 1000)
   }
   catch (e) {
-    badEnvParams['message'] = e;
+    badEnvParams['message'] = e.message;
   }
-  console.log(badEnvParams);
+
   return badEnvParams;
 
 }
