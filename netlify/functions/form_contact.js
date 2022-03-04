@@ -35,7 +35,7 @@ exports.handler = async (event, context) => {
   const mailDescriptor = {
     from: fields.email,
     to: process.env.CONTACT_EMAIL,
-    subject: fields.name + 'sent you a message from cookmood.stream',
+    subject: fields.name + ' sent you a message from cookmood.stream',
     text: fields.message,
   };
 
