@@ -4,7 +4,7 @@
         <h1 class="f3 mid-gray lh-title">
             {{ .Title }}
         </h1>
-        <time class="f6 ttu tracked gray">{{ .Date.Format "January 2, 2006" }}</time>
+        <time class="f6 ttu tracked gray">{{ time.Format "2 January 2006" .Date }}</time>
         
         {{ partial "social-share.html" . }}
 
