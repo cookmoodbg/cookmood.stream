@@ -8,14 +8,14 @@
         
         {{ partial "social-share.html" . }}
 
-        <div class="pa4">
+        <div class="pr4">
             <div class="overflow-auto">
                 <table class="f6 w-100 mw8 center" cellspacing="0">
                     <tbody class="lh-copy">
                         {{ range $key, $value := .Params.ingredients }}
                         <tr>
-                            <td class="pv3 pr3 bb b--black-20">{{$key}}</td>
-                            <td class="pv3 pr3 bb b--black-20">{{$value}}</td>
+                            <td class="pv3 pr3 bb b--black-20 w-80">{{$key}}</td>
+                            <td class="pv3 pr3 bb b--black-20 w-20">{{$value}}</td>
                         </tr>
                         {{ end }}
                     </tbody>
