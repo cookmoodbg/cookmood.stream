@@ -4,18 +4,18 @@
         <h1 class="f3 mid-gray lh-title">
             {{ .Title }}
         </h1>
-        <time class="f6 ttu tracked gray">{{ .Date.Format "January 2, 2006" }}</time>
+        <time class="f6 ttu tracked gray">{{ time.Format "2 January 2006" .Date }}</time>
         
         {{ partial "social-share.html" . }}
 
-        <div class="pa4">
+        <div class="pr4">
             <div class="overflow-auto">
                 <table class="f6 w-100 mw8 center" cellspacing="0">
                     <tbody class="lh-copy">
                         {{ range $key, $value := .Params.ingredients }}
                         <tr>
-                            <td class="pv3 pr3 bb b--black-20">{{$key}}</td>
-                            <td class="pv3 pr3 bb b--black-20">{{$value}}</td>
+                            <td class="pv3 pr3 bb b--black-20 w-80">{{$key}}</td>
+                            <td class="pv3 pr3 bb b--black-20 w-20">{{$value}}</td>
                         </tr>
                         {{ end }}
                     </tbody>
