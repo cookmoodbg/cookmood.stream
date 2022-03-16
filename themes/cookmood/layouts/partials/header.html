@@ -1,10 +1,11 @@
 <header class="bg-white black-80 tc pv4 avenir">
   <a href="/" class="">
-    <img
-      src="/cookmood.stream_logo.png"
-      class="br-100 h4 w4 dib ba b--black-05 pa2"
-      alt="{{ .Site.Title }}"
-    />
+    {{ with resources.Get "cookmood.stream_logo.png" }}
+      <img
+        src="data:{{ .MediaType }};base64,{{ .Content | base64Encode }}"
+        class="br-100 h4 w4 dib ba b--black-05 pa2"
+      />
+    {{ end }}
   </a>
   <h2 class="mt2 mb0 f6 fw4 ttu tracked">
     {{ cond (ne .Page.Section "") (.GetPage .Page.Section).Title
