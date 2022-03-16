@@ -1,6 +1,4 @@
-var slideshowController;
-
-function SlideshowController(imageClassSelector) {
+export function SlideshowController(imageClassSelector) {
   var slideIndex = 1;
   this.init = function () {
     this.showDivs(slideIndex);
@@ -23,8 +21,3 @@ function SlideshowController(imageClassSelector) {
     x[slideIndex - 1].style.display = "block";
   };
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  slideshowController = new SlideshowController("slideshowSlides");
-  slideshowController.init();
-});
