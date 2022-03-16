@@ -1,4 +1,7 @@
 {{ define "main" }}
+{{ with resources.Get "js/slideshow.js" | minify | fingerprint }}
+<script src="{{ .RelPermalink }}"></script>
+{{ end }}
 <article class="cf ph3 ph6-ns pv4 avenir">
     <header class="fn fl-ns w-50-ns">
         <h1 class="f3 mid-gray lh-title">
@@ -24,11 +27,13 @@
         </div>
 
     </header>
-    <div class="fn fl-ns w-50-ns pv4">
-        {{ with .Resources.GetMatch "cover.jpg" }}
-        <img src="data:{{ .MediaType }};base64,{{ .Content | base64Encode }}" alt="{{ .Title }}"
-            class="mw-100" />
+    <div class="fn fl-ns w-50-ns pv4 relative">
+        {{ range .Resources.Match "images/slideshow/*" }}
+            <img src="data:{{ .MediaType }};base64,{{ .Content | base64Encode }}" alt="{{ .Title }}"
+                class="mw-100 slideshowSlides" />
         {{ end }}
+        <button class="absolute top-2 f6 link dim br-pill ba ph3 pv2 mb2 dib dark-green" onclick="slideshowController.plusDivs(-1)">&#10094;</button>
+        <button class="absolute top-2 right-0 f6 link dim br-pill ba ph3 pv2 mb2 dib dark-green" onclick="slideshowController.plusDivs(+1)">&#10095;</button>
     </div>
     <div class="fn fl-ns w-100-ns f5 lh-copy">
         {{.Content}}
