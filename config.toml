@@ -12,6 +12,7 @@ theme = 'cookmood'
 [params]
   logo_file = "cookmood.stream_logo.png"
   has_favicon = true
+  prod_base_url = "https://cookmood.stream"
 
 [params.header.default]
   description = "моят готварски блог"

@@ -1,5 +1,5 @@
 {{ $title := .Title }}
-{{ $url := printf "%s%s" "https:" .Permalink }}
+{{ $url := printf "%s%s" .Site.Params.prod_base_url .Permalink }}
 {{ $icon_size := "32px" }}
 
 {{ if .Site.Params.Single.enable_social_share }}
