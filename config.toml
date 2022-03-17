@@ -9,8 +9,10 @@ theme = 'cookmood'
   priority = 0.5
   filename = "sitemap.xml"
 
-[params.header]
+[params]
   logo_file = "cookmood.stream_logo.png"
+  has_favicon = true
+
 [params.header.default]
   description = "моят готварски блог"
   to_beginning = "Начало"
