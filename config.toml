@@ -14,6 +14,10 @@ theme = 'cookmood'
   to_beginning = "Начало"
 [params.footer.default]
   copyright_message = "Всички права запазени."
+  copyright_links = [
+    { text = "Vector Vectors by Vecteezy", link = "https://www.vecteezy.com/free-vector/vector" },
+    { text = "Nature Vectors by Vecteezy", link = "https://www.vecteezy.com/free-vector/nature" },
+  ]
 [params.footer.social]
   follow_facebook_url = ""
   follow_instagram_url = ""

@@ -1,7 +1,12 @@
 <footer class="pv4 ph3 ph5-m ph6-l mid-gray avenir">
-  <small class="f6 db tc"
-    >© {{ now.Format "2006"}} <b class="ttu">{{ .Site.Title }}</b>, {{
-    .Site.Params.Footer.Default.copyright_message }}</small
-  >
+  <small class="f6 db tc">
+    © {{ now.Format "2006"}} <b class="ttu">{{ .Site.Title }}</b>, {{
+    .Site.Params.Footer.Default.copyright_message }}
+  </small>
+  <small class="f6 db tc">
+    {{ range .Site.Params.Footer.Default.copyright_links }}
+      <a href="{{.link}}" target="_blank" class="link black-80">{{.text}}</a>
+    {{ end }}
+  </small>
   <div class="tc mt3">{{ partial "social-follow.html" . }}</div>
 </footer>
