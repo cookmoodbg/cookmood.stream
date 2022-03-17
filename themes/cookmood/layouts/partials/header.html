@@ -1,6 +1,6 @@
 <header class="bg-white black-80 tc pv4 avenir">
   <a href="/" class="">
-    {{ with resources.Get "cookmood.stream_logo.png" }}
+    {{ with resources.Get .Site.Params.Header.logo_file }}
       <img
         src="data:{{ .MediaType }};base64,{{ .Content | base64Encode }}"
         class="br-100 h4 w4 dib ba b--black-05 pa2"

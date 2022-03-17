@@ -9,6 +9,8 @@ theme = 'cookmood'
   priority = 0.5
   filename = "sitemap.xml"
 
+[params.header]
+  logo_file = "cookmood.stream_logo.png"
 [params.header.default]
   description = "моят готварски блог"
   to_beginning = "Начало"
@@ -29,6 +31,7 @@ theme = 'cookmood'
   label_name = "Вашето име"
   label_email = "Вашият email"
   label_message = "Вашето съобщение"
+  label_button = "Изпрати"
 [params.contact]
   action = "/.netlify/functions/form_contact"
 [params.e404]
