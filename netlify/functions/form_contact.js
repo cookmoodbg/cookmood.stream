@@ -1,7 +1,6 @@
 "use strict";
 
 const nodemailer = require("nodemailer");
-const querystring = require("querystring");
 const captchaJs = require("captcha-genjs");
 
 exports.handler = async (event, context) => {
@@ -13,7 +12,7 @@ exports.handler = async (event, context) => {
     };
   }
 
-  const fields = querystring.parse(event.body);
+  const fields = JSON.parse(event.body);
 
   const userParamsValidationStatus = validateUserParams(fields);
   if (Object.keys(userParamsValidationStatus).length > 0) {
@@ -27,7 +26,9 @@ exports.handler = async (event, context) => {
   if (!captcha.checkCode(fields.captcha_attempt, fields.captcha_hash)) {
     return {
       statusCode: 400,
-      body: "Captcha verification failed.",
+      body: JSON.stringify({
+        message: "Captcha verification failed.",
+      }),
     };
   }
 
@@ -60,10 +61,7 @@ exports.handler = async (event, context) => {
 
   if (success) {
     return {
-      statusCode: 303,
-      headers: {
-        Location: "/",
-      },
+      statusCode: 200,
     };
   }
   if (error) {

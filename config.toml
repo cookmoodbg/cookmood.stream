@@ -37,7 +37,7 @@ theme = 'cookmood'
   label_captcha_image_initial = "Кникни ТУК за зареждане на изображение"
   label_captcha_attempt = "Моля въведете символите от изображението:"
   label_button = "Изпрати"
-[params.contact]
-  action = "/.netlify/functions/form_contact"
+  label_message_error = "Проблем при изпращане на съобщение. Моля опитайте отново."
+  label_message_sent = "Съобщението е изпратено успешно."
 [params.e404]
   message = "Съдържанието не е открито."
