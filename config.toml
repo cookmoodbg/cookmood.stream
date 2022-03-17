@@ -9,11 +9,20 @@ theme = 'cookmood'
   priority = 0.5
   filename = "sitemap.xml"
 
+[params]
+  logo_file = "cookmood.stream_logo.png"
+  has_favicon = true
+  prod_base_url = "https://cookmood.stream"
+
 [params.header.default]
   description = "моят готварски блог"
   to_beginning = "Начало"
 [params.footer.default]
   copyright_message = "Всички права запазени."
+  copyright_links = [
+    { text = "Vector Vectors by Vecteezy", link = "https://www.vecteezy.com/free-vector/vector" },
+    { text = "Nature Vectors by Vecteezy", link = "https://www.vecteezy.com/free-vector/nature" },
+  ]
 [params.footer.social]
   follow_facebook_url = ""
   follow_instagram_url = ""
@@ -25,6 +34,7 @@ theme = 'cookmood'
   label_name = "Вашето име"
   label_email = "Вашият email"
   label_message = "Вашето съобщение"
+  label_button = "Изпрати"
 [params.contact]
   action = "/.netlify/functions/form_contact"
 [params.e404]
