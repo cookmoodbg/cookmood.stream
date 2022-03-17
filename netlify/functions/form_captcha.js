@@ -3,7 +3,6 @@
 const captchaJs = require("captcha-genjs");
 
 exports.handler = async (event, context) => {
-
   const envParamsValidationStatus = validateEnvParams();
   if (envParamsValidationStatus.length > 0) {
     return {
@@ -15,7 +14,7 @@ exports.handler = async (event, context) => {
   const captcha = captchaJs.create(process.env.CAPTCHA_SECRET);
 
   const alphabet = {
-    alphabet: "ABCDEF123456789",
+    alphabet: "123456789",
     len: 6,
   };
 
@@ -25,14 +24,13 @@ exports.handler = async (event, context) => {
   return {
     statusCode: 200,
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       url: captchaResult.url,
       hash: captchaResult.hash,
     }),
   };
-  
 };
 
 function validateEnvParams() {

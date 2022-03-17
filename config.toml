@@ -30,9 +30,12 @@ theme = 'cookmood'
 [params.single]
   enable_social_share = true
 [params.contact.default]
-  label_name = "Вашето име"
-  label_email = "Вашият email"
-  label_message = "Вашето съобщение"
+  label_name = "Вашето име:"
+  label_email = "Вашият email:"
+  label_message = "Вашето съобщение:"
+  label_captcha_image = "Антиробот верификация:"
+  label_captcha_image_initial = "Кникни ТУК за зареждане на изображение"
+  label_captcha_attempt = "Моля въведете символите от изображението:"
   label_button = "Изпрати"
 [params.contact]
   action = "/.netlify/functions/form_contact"

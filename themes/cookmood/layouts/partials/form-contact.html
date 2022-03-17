@@ -1,6 +1,31 @@
 {{ $.Scratch.Add "labelClasses" "f6 b db mb1 mt3 sans-serif mid-gray" }}
 {{ $.Scratch.Add "inputClasses" "w-100 f5 pv3 ph3 bg-light-gray bn" }}
 
+<script type="module">
+  
+  function updateCaptcha () {
+    let urls = [
+      '/.netlify/functions/form_captcha'
+    ];
+
+    let requests = urls.map(url => fetch(url));
+
+    Promise.all(requests)
+      .then(responses => Promise.all(responses.map(r => r.json())))
+      .then(responses => responses.forEach(
+        response => {
+          document.getElementById("captcha_image").setAttribute("src", response.url);
+          document.getElementById("captcha_hash").setAttribute("value", response.hash);
+        }
+      ));
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    window._appStructs = { updateCaptcha };
+  });
+
+</script>
+
 <form
   class="black-80 sans-serif"
   accept-charset="UTF-8"
@@ -45,6 +70,39 @@
     class="{{ $.Scratch.Get `inputClasses` }} h4"
     aria-labelledby="message"
   ></textarea>
+
+  <input
+    type="hidden"
+    id="captcha_hash"
+    name="captcha_hash"
+    value=""
+  />
+
+  <label class="{{ $.Scratch.Get `labelClasses` }}" for="captcha_image"
+    >{{ .Site.Params.Contact.Default.label_captcha_image }}
+  </label>
+
+  <img
+    id="captcha_image"
+    src=""
+    alt = "{{ .Site.Params.Contact.Default.label_captcha_image_initial }}"
+    style="height: 50px; width: 150px;"
+    onclick="window._appStructs.updateCaptcha();"
+  />
+
+  <label class="{{ $.Scratch.Get `labelClasses` }}" for="captcha_attempt"
+    >{{ .Site.Params.Contact.Default.label_captcha_attempt }}
+  </label>
+
+  <input
+    type="text"
+    id="captcha_attempt"
+    name="captcha_attempt"
+    class="{{ $.Scratch.Get `inputClasses` }}"
+    required
+    placeholder=" "
+    aria-labelledby="captcha_attempt"
+  />
 
   <input
     class="db w-100 mv2 white pa3 bn hover-shadow hover-bg-black bg-animate bg-black"

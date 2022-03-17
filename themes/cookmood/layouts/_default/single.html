@@ -3,7 +3,7 @@
 {{ $slideshow_js_lib := resources.Get "js/slideshow.js" | minify | fingerprint }}
 
 <script type=module>
-    import {SlideshowController} from '{{ $slideshow_js_lib.RelPermalink }}';
+    import { SlideshowController } from '{{ $slideshow_js_lib.RelPermalink }}';
     document.addEventListener("DOMContentLoaded", function () {
         let slideshowController = new SlideshowController("slideshowSlides");
         slideshowController.init();
