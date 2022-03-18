@@ -6,6 +6,7 @@
   <small class="f7 db tc">
     {{ range .Site.Params.Footer.Default.copyright_links }}
       <a href="{{.link}}" target="_blank" class="link black-80">{{.text}}</a>
+      <br>
     {{ end }}
   </small>
   <div class="tc mt3">{{ partial "social-follow.html" . }}</div>

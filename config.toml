@@ -21,7 +21,6 @@ theme = 'cookmood'
   copyright_message = "Всички права запазени."
   copyright_links = [
     { text = "Vector Vectors by Vecteezy", link = "https://www.vecteezy.com/free-vector/vector" },
-    { text = "Nature Vectors by Vecteezy", link = "https://www.vecteezy.com/free-vector/nature" },
   ]
 [params.footer.social]
   follow_facebook_url = ""
@@ -31,11 +30,15 @@ theme = 'cookmood'
 [params.single]
   enable_social_share = true
 [params.contact.default]
-  label_name = "Вашето име"
-  label_email = "Вашият email"
-  label_message = "Вашето съобщение"
+  label_name = "Вашето име:"
+  label_email = "Вашият email:"
+  label_message = "Вашето съобщение:"
+  label_captcha_image = "Антиробот верификация:"
+  label_captcha_image_initial = "Кникни ТУК за зареждане на изображение"
+  label_captcha_attempt = "Моля въведете символите от изображението:"
   label_button = "Изпрати"
-[params.contact]
-  action = "/.netlify/functions/form_contact"
+  label_message_error = "Проблем при изпращане на съобщение. Моля опитайте отново."
+  label_message_sent = "Съобщението е изпратено успешно."
+  label_message_sending = "Моля изчакайте..."
 [params.e404]
   message = "Съдържанието не е открито."

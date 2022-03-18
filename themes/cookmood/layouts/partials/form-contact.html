@@ -2,15 +2,16 @@
 {{ $.Scratch.Add "inputClasses" "w-100 f5 pv3 ph3 bg-light-gray bn" }}
 
 <form
+  id="contact_form"
   class="black-80 sans-serif"
   accept-charset="UTF-8"
-  action="{{ .Site.Params.Contact.action }}"
   method="POST"
   role="form"
 >
-  <label class="{{ $.Scratch.Get `labelClasses` }}" for="name"
-    >{{ .Site.Params.Contact.Default.label_name }}</label
-  >
+  <label class="{{ $.Scratch.Get `labelClasses` }}" for="name">
+    {{ .Site.Params.Contact.Default.label_name }}
+  </label>
+  
   <input
     type="text"
     id="name"
@@ -21,9 +22,10 @@
     aria-labelledby="name"
   />
 
-  <label class="{{ $.Scratch.Get `labelClasses` }}" for="email"
-    >{{ .Site.Params.Contact.Default.label_email }}</label
-  >
+  <label class="{{ $.Scratch.Get `labelClasses` }}" for="email">
+    {{ .Site.Params.Contact.Default.label_email }}
+  </label>
+
   <input
     type="email"
     id="email"
@@ -34,8 +36,8 @@
     aria-labelledby="email"
   />
 
-  <label class="{{ $.Scratch.Get `labelClasses` }}" for="message"
-    >{{ .Site.Params.Contact.Default.label_message }}
+  <label class="{{ $.Scratch.Get `labelClasses` }}" for="message">
+    {{ .Site.Params.Contact.Default.label_message }}
   </label>
 
   <textarea
@@ -47,8 +49,47 @@
   ></textarea>
 
   <input
-    class="db w-100 mv2 white pa3 bn hover-shadow hover-bg-black bg-animate bg-black"
+    type="hidden"
+    id="captcha_hash"
+    name="captcha_hash"
+    value="_"
+  />
+
+  <label class="{{ $.Scratch.Get `labelClasses` }}" for="captcha_image"
+    >{{ .Site.Params.Contact.Default.label_captcha_image }}
+  </label>
+
+  <img
+    id="captcha_image"
+    src=""
+    alt = "{{ .Site.Params.Contact.Default.label_captcha_image_initial }}"
+    style="height: 50px; width: 150px;"
+  />
+
+  <label class="{{ $.Scratch.Get `labelClasses` }}" for="captcha_attempt"
+    >{{ .Site.Params.Contact.Default.label_captcha_attempt }}
+  </label>
+
+  <input
+    type="text"
+    id="captcha_attempt"
+    name="captcha_attempt"
+    class="{{ $.Scratch.Get `inputClasses` }}"
+    required
+    placeholder=" "
+    aria-labelledby="captcha_attempt"
+  />
+
+  <input
+    id="submit_button"
+    class="db w-100 mv2 white pa3 bn hover-shadow hover-bg-dark-gray bg-animate bg-black"
     type="submit"
     value="{{ .Site.Params.Contact.Default.label_button }}"
   />
 </form>
+<div class="{{ $.Scratch.Get `labelClasses` }}">
+  <p id="form_status"></p>
+</div>
+
+{{ $form_contact_js_main := resources.Get "js/form-contact.js" | js.Build (dict "minify" true "params" (dict "formSentMessageOk" .Site.Params.Contact.Default.label_message_sent "formSentMessageError" .Site.Params.Contact.Default.label_message_error "formSendingMessage" .Site.Params.Contact.Default.label_message_sending)) }}
+<script type=module src="{{ $form_contact_js_main.RelPermalink }}"></script>
