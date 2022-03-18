@@ -1,7 +1,6 @@
 "use strict";
 
 const nodemailer = require("nodemailer");
-const captchaJs = require("captcha-genjs");
 
 exports.handler = async (event, context) => {
   const envParamsValidationStatus = validateEnvParams();
@@ -19,16 +18,6 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 400,
       body: JSON.stringify(userParamsValidationStatus),
-    };
-  }
-
-  const captcha = captchaJs.create(process.env.CAPTCHA_SECRET);
-  if (!captcha.checkCode(fields.captcha_attempt, fields.captcha_hash)) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({
-        message: "Captcha verification failed.",
-      }),
     };
   }
 
@@ -86,9 +75,6 @@ function validateEnvParams() {
   if (!process.env.SMTP_PASS) {
     missingEnvParams.push("SMTP_PASS");
   }
-  if (!process.env.CAPTCHA_SECRET) {
-    missingEnvParams.push("CAPTCHA_SECRET");
-  }
   return missingEnvParams;
 }
 
@@ -111,18 +97,6 @@ function validateUserParams(fields) {
     validateLength("message", fields.message, 1, 1000);
   } catch (e) {
     badEnvParams["message"] = e.message;
-  }
-
-  try {
-    validateLength("captcha_attempt", fields.captcha_attempt, 1, 1000);
-  } catch (e) {
-    badEnvParams["captcha_attempt"] = e.message;
-  }
-
-  try {
-    validateLength("captcha_hash", fields.captcha_hash, 1, 1000);
-  } catch (e) {
-    badEnvParams["captcha_hash"] = e.message;
   }
 
   return badEnvParams;
