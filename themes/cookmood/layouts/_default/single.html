@@ -1,16 +1,4 @@
 {{ define "main" }}
-
-{{ $slideshow_js_lib := resources.Get "js/slideshow.js" | minify | fingerprint }}
-
-<script type=module>
-    import { SlideshowController } from '{{ $slideshow_js_lib.RelPermalink }}';
-    document.addEventListener("DOMContentLoaded", function () {
-        let slideshowController = new SlideshowController("slideshowSlides");
-        slideshowController.init();
-        window._appStructs = { slideshowController };
-    });
-</script>
-
 <article class="cf ph3 ph6-ns pv4 avenir">
     <header class="fn fl-ns w-50-ns">
         <h1 class="f3 mid-gray lh-title">
@@ -41,11 +29,17 @@
             <img src="data:{{ .MediaType }};base64,{{ .Content | base64Encode }}" alt="{{ .Title }}"
                 class="mw-100 slideshowSlides" />
         {{ end }}
-        <button class="absolute top-2 f6 link dim br-pill ba ph3 pv2 mb2 dib dark-green" onclick="window._appStructs.slideshowController.plusDivs(-1)">&#10094;</button>
-        <button class="absolute top-2 right-0 f6 link dim br-pill ba ph3 pv2 mb2 dib dark-green" onclick="window._appStructs.slideshowController.plusDivs(+1)">&#10095;</button>
+        <button id="button_slideshow_left" class="absolute top-2 f6 link dim br-pill ba ph3 pv2 mb2 dib dark-green">&#10094;</button>
+        <button id="button_slideshow_right" class="absolute top-2 right-0 f6 link dim br-pill ba ph3 pv2 mb2 dib dark-green">&#10095;</button>
     </div>
     <div class="fn fl-ns w-100-ns f5 lh-copy">
         {{.Content}}
     </div>
 </article>
+
+{{ $slideshow_js_lib := resources.Get "js/util/slideshow.js" | js.Build (dict "minify" true) }}
+{{ $single_js_main := resources.Get "js/single.js" | js.Build (dict "minify" true) }}
+<script type=module src="{{ $slideshow_js_lib.RelPermalink }}"></script>
+<script type=module src="{{ $single_js_main.RelPermalink }}"></script>
+
 {{ end }}
