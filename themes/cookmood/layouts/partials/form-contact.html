@@ -1,78 +1,6 @@
 {{ $.Scratch.Add "labelClasses" "f6 b db mb1 mt3 sans-serif mid-gray" }}
 {{ $.Scratch.Add "inputClasses" "w-100 f5 pv3 ph3 bg-light-gray bn" }}
 
-<script type="module">
-  
-  function updateCaptcha () {
-    let urls = [
-      '/.netlify/functions/form_captcha'
-    ];
-
-    let requests = urls.map(url => fetch(url));
-
-    Promise.all(requests)
-      .then(responses => Promise.all(responses.map(r => r.json())))
-      .then(responses => responses.forEach(
-        response => {
-          document.getElementById("captcha_image").setAttribute("src", response.url);
-          document.getElementById("captcha_hash").setAttribute("value", response.hash);
-        }
-      ));
-  }
-
-  function postForm(formData) {
-
-    const data = {};
-    formData.forEach((value, key) => {data[key] = value});
-
-    fetch('/.netlify/functions/form_contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-    .then(response => {
-      if(response.ok) {
-        document.getElementById("form_status_ok").style.display = "block";
-        document.getElementById("form_status_nok").style.display = "none";
-      } else {
-        document.getElementById("form_status_ok").style.display = "none";
-        document.getElementById("form_status_nok").style.display = "block";
-      }
-      console.log(response);
-    })
-    .catch((error) => {
-      document.getElementById("form_status_ok").style.display = "none";
-      document.getElementById("form_status_nok").style.display = "block";
-      console.error('Error:', error);
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-
-    document.getElementById("form_status_ok").style.display = "none";
-    document.getElementById("form_status_nok").style.display = "none";
-
-    document.getElementById("captcha_image")
-      .addEventListener( 'click',
-        function() {
-          updateCaptcha();
-        }
-      );
-    
-    const form = document.getElementById("contact_form");
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-      document.getElementById("submit_button").setAttribute("disabled", "disabled");
-      const formData = new FormData(form);
-      postForm(formData);
-      document.getElementById("submit_button").removeAttribute("disabled");
-    });
-  });
-
-</script>
-
 <form
   id="contact_form"
   class="black-80 sans-serif"
@@ -160,10 +88,8 @@
   />
 </form>
 <div class="{{ $.Scratch.Get `labelClasses` }}">
-  <p id="form_status_ok">
-    {{ .Site.Params.Contact.Default.label_message_sent }}
-  </p>
-  <p id="form_status_nok">
-    {{ .Site.Params.Contact.Default.label_message_error }}
-  </p>
+  <p id="form_status"></p>
 </div>
+
+{{ $form_contact_js_main := resources.Get "js/form-contact.js" | js.Build (dict "minify" true "params" (dict "formSentMessageOk" .Site.Params.Contact.Default.label_message_sent "formSentMessageError" .Site.Params.Contact.Default.label_message_error)) }}
+<script type=module src="{{ $form_contact_js_main.RelPermalink }}"></script>
