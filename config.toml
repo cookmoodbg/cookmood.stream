@@ -39,5 +39,6 @@ theme = 'cookmood'
   label_button = "Изпрати"
   label_message_error = "Проблем при изпращане на съобщение. Моля опитайте отново."
   label_message_sent = "Съобщението е изпратено успешно."
+  label_message_sending = "Моля изчакайте..."
 [params.e404]
   message = "Съдържанието не е открито."

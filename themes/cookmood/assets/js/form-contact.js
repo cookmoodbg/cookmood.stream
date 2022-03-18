@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("contact_form");
   form.addEventListener("submit", function (event) {
     event.preventDefault();
-    document.getElementById("form_status").innerHTML = "";
+    document.getElementById("form_status").innerHTML = params.formSendingMessage;
     const formData = new FormData(form);
     postForm(formData);
   });

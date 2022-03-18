@@ -82,7 +82,7 @@
 
   <input
     id="submit_button"
-    class="db w-100 mv2 white pa3 bn hover-shadow hover-bg-black bg-animate bg-black"
+    class="db w-100 mv2 white pa3 bn hover-shadow hover-bg-dark-gray bg-animate bg-black"
     type="submit"
     value="{{ .Site.Params.Contact.Default.label_button }}"
   />
@@ -91,5 +91,5 @@
   <p id="form_status"></p>
 </div>
 
-{{ $form_contact_js_main := resources.Get "js/form-contact.js" | js.Build (dict "minify" true "params" (dict "formSentMessageOk" .Site.Params.Contact.Default.label_message_sent "formSentMessageError" .Site.Params.Contact.Default.label_message_error)) }}
+{{ $form_contact_js_main := resources.Get "js/form-contact.js" | js.Build (dict "minify" true "params" (dict "formSentMessageOk" .Site.Params.Contact.Default.label_message_sent "formSentMessageError" .Site.Params.Contact.Default.label_message_error "formSendingMessage" .Site.Params.Contact.Default.label_message_sending)) }}
 <script type=module src="{{ $form_contact_js_main.RelPermalink }}"></script>
