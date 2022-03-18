@@ -75,9 +75,6 @@ function validateEnvParams() {
   if (!process.env.SMTP_PASS) {
     missingEnvParams.push("SMTP_PASS");
   }
-  if (!process.env.CAPTCHA_SECRET) {
-    missingEnvParams.push("CAPTCHA_SECRET");
-  }
   return missingEnvParams;
 }
 
@@ -100,18 +97,6 @@ function validateUserParams(fields) {
     validateLength("message", fields.message, 1, 1000);
   } catch (e) {
     badEnvParams["message"] = e.message;
-  }
-
-  try {
-    validateLength("captcha_attempt", fields.captcha_attempt, 1, 1000);
-  } catch (e) {
-    badEnvParams["captcha_attempt"] = e.message;
-  }
-
-  try {
-    validateLength("captcha_hash", fields.captcha_hash, 1, 1000);
-  } catch (e) {
-    badEnvParams["captcha_hash"] = e.message;
   }
 
   return badEnvParams;
