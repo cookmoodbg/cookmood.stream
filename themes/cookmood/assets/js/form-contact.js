@@ -1,29 +1,5 @@
 import * as params from "@params";
 
-function updateCaptcha() {
-  fetch("/.netlify/functions/form_captcha", {
-    method: "GET",
-  })
-  .then((response) => {
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error(response.status + ' : ' + response.statusText);
-    }
-  })
-  .then((data) => {
-    document
-      .getElementById("captcha_image")
-      .setAttribute("src", data.url);
-    document
-      .getElementById("captcha_hash")
-      .setAttribute("value", data.hash);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-}
-
 function postForm(formData) {
   const data = {};
   formData.forEach((value, key) => {
@@ -53,11 +29,6 @@ function postForm(formData) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  document
-    .getElementById("captcha_image")
-    .addEventListener("click", function () {
-      updateCaptcha();
-    });
 
   const form = document.getElementById("contact_form");
   form.addEventListener("submit", function (event) {

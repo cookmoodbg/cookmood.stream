@@ -49,38 +49,6 @@
   ></textarea>
 
   <input
-    type="hidden"
-    id="captcha_hash"
-    name="captcha_hash"
-    value="_"
-  />
-
-  <label class="{{ $.Scratch.Get `labelClasses` }}" for="captcha_image"
-    >{{ .Site.Params.Contact.Default.label_captcha_image }}
-  </label>
-
-  <img
-    id="captcha_image"
-    src=""
-    alt = "{{ .Site.Params.Contact.Default.label_captcha_image_initial }}"
-    style="height: 50px; width: 150px;"
-  />
-
-  <label class="{{ $.Scratch.Get `labelClasses` }}" for="captcha_attempt"
-    >{{ .Site.Params.Contact.Default.label_captcha_attempt }}
-  </label>
-
-  <input
-    type="text"
-    id="captcha_attempt"
-    name="captcha_attempt"
-    class="{{ $.Scratch.Get `inputClasses` }}"
-    required
-    placeholder=" "
-    aria-labelledby="captcha_attempt"
-  />
-
-  <input
     id="submit_button"
     class="db w-100 mv2 white pa3 bn hover-shadow hover-bg-dark-gray bg-animate bg-black"
     type="submit"

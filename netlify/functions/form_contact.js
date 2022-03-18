@@ -1,7 +1,6 @@
 "use strict";
 
 const nodemailer = require("nodemailer");
-const captchaJs = require("captcha-genjs");
 
 exports.handler = async (event, context) => {
   const envParamsValidationStatus = validateEnvParams();
@@ -19,16 +18,6 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 400,
       body: JSON.stringify(userParamsValidationStatus),
-    };
-  }
-
-  const captcha = captchaJs.create(process.env.CAPTCHA_SECRET);
-  if (!captcha.checkCode(fields.captcha_attempt, fields.captcha_hash)) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({
-        message: "Captcha verification failed.",
-      }),
     };
   }
 
