@@ -1,5 +1,5 @@
 {{ define "main" }}
-<article id="recipe" class="cf ph3 ph6-l pv4 avenir">
+<article id="recipe" class="cf ph4 ph5-l pv4 avenir">
     <header class="fn fl-l w-50-l">
         <h1 class="f3 mid-gray lh-title">
             {{ .Title }}
@@ -24,13 +24,15 @@
         </div>
 
     </header>
-    <div class="fn fl-l w-50-l pv4 relative">
-        {{ range .Resources.Match "images/slideshow/*" }}
+    <div class="fn fl-l w-50-l pv4">
+        <div class="measure-wide">
+            <button id="button_slideshow_left" class="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-green">&#10094;</button>
+            <button id="button_slideshow_right" class="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-green fr">&#10095;</button>
+            {{ range .Resources.Match "images/slideshow/*" }}
             <img src="data:{{ .MediaType }};base64,{{ .Content | base64Encode }}" alt="{{ .Title }}"
                 class="mw-100 slideshowSlides" />
-        {{ end }}
-        <button id="button_slideshow_left" class="absolute top-2 f6 link dim br-pill ba ph3 pv2 mb2 dib dark-green">&#10094;</button>
-        <button id="button_slideshow_right" class="absolute top-2 right-0 f6 link dim br-pill ba ph3 pv2 mb2 dib dark-green">&#10095;</button>
+            {{ end }}
+        </div>
     </div>
     <div class="fn fl-l w-100-l f5 lh-copy">
         {{.Content}}
