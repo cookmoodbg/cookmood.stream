@@ -1,4 +1,4 @@
-import { SlideshowController } from "./util/slideshow.js";
+import { SlideshowController } from "../../util/slideshow.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   let slideshowController = new SlideshowController("slideshowSlides");
@@ -15,4 +15,5 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("click", function () {
       slideshowController.plusDivs(+1);
     });
+  
 });
