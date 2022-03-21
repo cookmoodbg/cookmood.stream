@@ -17,7 +17,6 @@
     id="name"
     name="name"
     class="{{ $.Scratch.Get `inputClasses` }}"
-    required
     placeholder=" "
     aria-labelledby="name"
   />
@@ -27,11 +26,10 @@
   </label>
 
   <input
-    type="email"
+    type="text"
     id="email"
     name="email"
     class="{{ $.Scratch.Get `inputClasses` }}"
-    required
     placeholder=" "
     aria-labelledby="email"
   />
@@ -43,7 +41,6 @@
   <textarea
     id="message"
     name="message"
-    required
     class="{{ $.Scratch.Get `inputClasses` }} h4"
     aria-labelledby="message"
   ></textarea>
@@ -59,5 +56,5 @@
   <p id="form_status"></p>
 </div>
 
-{{ $form_contact_js_main := resources.Get "js/partials/form-contact/form-contact.js" | js.Build (dict "minify" true "params" (dict "formSentMessageOk" .Site.Params.Contact.Default.label_message_sent "formSentMessageError" .Site.Params.Contact.Default.label_message_error "formSendingMessage" .Site.Params.Contact.Default.label_message_sending)) | fingerprint }}
+{{ $form_contact_js_main := resources.Get "js/partials/form-contact/form-contact.js" | js.Build (dict "minify" true "params" (dict "formSentMessageOk" .Site.Params.Contact.Default.label_message_sent "formSentMessageError" .Site.Params.Contact.Default.label_message_error "formSendingMessage" .Site.Params.Contact.Default.label_message_sending "formValidationErrorMessage" .Site.Params.Contact.Default.label_message_validation_error)) | fingerprint }}
 <script type=module src="{{ $form_contact_js_main.RelPermalink }}"></script>
