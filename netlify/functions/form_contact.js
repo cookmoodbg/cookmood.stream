@@ -1,13 +1,13 @@
-"use strict";
+'use strict';
 
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 
 exports.handler = async (event, context) => {
   const envParamsValidationStatus = validateEnvParams();
   if (envParamsValidationStatus.length > 0) {
     return {
       statusCode: 500,
-      body: envParamsValidationStatus.toString() + " must be defined",
+      body: envParamsValidationStatus.toString() + ' must be defined',
     };
   }
 
@@ -33,7 +33,7 @@ exports.handler = async (event, context) => {
   const mailDescriptor = {
     from: fields.email,
     to: process.env.CONTACT_EMAIL,
-    subject: fields.name + " sent you a message from cookmood.stream",
+    subject: fields.name + ' sent you a message from cookmood.stream',
     text: fields.message,
   };
 
@@ -64,16 +64,16 @@ exports.handler = async (event, context) => {
 function validateEnvParams() {
   const missingEnvParams = [];
   if (!process.env.CONTACT_EMAIL) {
-    missingEnvParams.push("CONTACT_EMAIL");
+    missingEnvParams.push('CONTACT_EMAIL');
   }
   if (!process.env.SMTP_HOST) {
-    missingEnvParams.push("SMTP_HOST");
+    missingEnvParams.push('SMTP_HOST');
   }
   if (!process.env.SMTP_USER) {
-    missingEnvParams.push("SMTP_USER");
+    missingEnvParams.push('SMTP_USER');
   }
   if (!process.env.SMTP_PASS) {
-    missingEnvParams.push("SMTP_PASS");
+    missingEnvParams.push('SMTP_PASS');
   }
   return missingEnvParams;
 }
@@ -82,28 +82,28 @@ function validateUserParams(fields) {
   const badEnvParams = {};
 
   try {
-    validateLength("name", fields.name, 1, 50);
+    validateLength('name', fields.name, 1, 50);
   } catch (e) {
-    badEnvParams["name"] = e.message;
+    badEnvParams['name'] = e.message;
   }
 
   try {
-    validateEmail("email", fields.email);
+    validateEmail('email', fields.email);
   } catch (e) {
-    badEnvParams["email"] = e.message;
+    badEnvParams['email'] = e.message;
   }
 
   try {
-    validateLength("message", fields.message, 1, 1000);
+    validateLength('message', fields.message, 1, 1000);
   } catch (e) {
-    badEnvParams["message"] = e.message;
+    badEnvParams['message'] = e.message;
   }
 
   return badEnvParams;
 }
 
 function validateEmail(ctx, str) {
-  if (typeof str !== "string" && !(str instanceof String)) {
+  if (typeof str !== 'string' && !(str instanceof String)) {
     throw TypeError(`${ctx} must be a string`);
   }
 
@@ -125,7 +125,7 @@ function validateLength(ctx, str, ...args) {
     max = args[1];
   }
 
-  if (typeof str !== "string" && !(str instanceof String)) {
+  if (typeof str !== 'string' && !(str instanceof String)) {
     throw TypeError(`${ctx} must be a string`);
   }
 

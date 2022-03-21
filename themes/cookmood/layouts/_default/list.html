@@ -1,8 +1,8 @@
 {{ define "main" }}
-<article class="cf ph3 ph5-ns avenir">
+<article class="cf ph3 ph5-l avenir">
     <div class="cf pa2">
         {{ range .Pages }}
-        <div class="fl w-50 w-25-m w-20-l pa2">
+        <div class="fl w-50 w-third-m w-20-l pa2">
             <a href="{{ .Permalink }}" class="db link dim tc">
                 {{ with .Resources.GetMatch "thumbnail.jpg" }}
                 <img src="data:{{ .MediaType }};base64,{{ .Content | base64Encode }}" alt="{{ .Title }}"
