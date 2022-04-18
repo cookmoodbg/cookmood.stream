@@ -1,7 +1,7 @@
 {{ define "main" }}
 <article class="cf ph3 ph5-l avenir">
     <div class="cf pa2">
-        {{ range .Pages }}
+        {{ range .Pages.ByDate.Reverse }}
         <div class="fl w-50 w-third-m w-20-l pa2">
             <a href="{{ .Permalink }}" class="db link dim tc">
                 {{ with .Resources.GetMatch "thumbnail.jpg" }}
